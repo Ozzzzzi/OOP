@@ -1,10 +1,9 @@
 public class HeapSort {
     /**
      * Sorts an array of integers. The maximum number of array elements allowed is
-     * <code>Integer.MAX_VALUE - 8</code>.
+     * <code>Integer.MAX_VALUE - 8</code>. The sorted array is located in <code>arr</code>.
      *
      * @param  arr  the array to sort
-     * @return      the sorted array at the same location
      */
 
     public static void sort(int arr[]) {
