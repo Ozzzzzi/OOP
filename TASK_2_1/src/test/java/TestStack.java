@@ -6,14 +6,14 @@ public class TestStack {
     @Test
     public void testStack1() {
         MyStack<Integer> test1 = new MyStack<>();
-        //Iterator<Integer> iter = test1.stack.iterator();
         int fst = 2, snd = 7;
         int count = 2;
         test1.push(fst);
         test1.push(snd);
-        /*while(iter.hasNext()) {
+        Iterator<Integer> iter = test1.stack.iterator();
+        while(iter.hasNext()) {
             System.out.println(iter.next());
-        }*/
+        }
         Assert.assertEquals(count, test1.count());
         count--;
         Assert.assertEquals(snd, (int)test1.pop());
@@ -26,16 +26,16 @@ public class TestStack {
     @Test
     public void testStack2() {
         MyStack<String> test2 = new MyStack<>();
-       // Iterator<String> iter = test2.stack.iterator();
         String fst = "first", snd = "second";
         String thd = "third", fth = "fourth";
         test2.push(fst);
         test2.push(snd);
         test2.push(thd);
         test2.push(fth);
-       /* while(iter.hasNext()) {
+        Iterator<String> iter = test2.stack.iterator();
+        while(iter.hasNext()) {
             System.out.println(iter.next());
-        }*/
+        }
         Assert.assertEquals(fth, test2.pop());
         Assert.assertEquals(thd, test2.pop());
         Assert.assertEquals(snd, test2.pop());
