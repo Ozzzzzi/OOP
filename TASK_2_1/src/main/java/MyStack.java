@@ -1,23 +1,34 @@
+import java.lang.reflect.Array;
 import java.util.*;
 
-public class MyStack<T> {
+public class MyStack<T> implements Iterable<T> {
 
-    public List<T> stack;
+    private T[] stack;
+    private int count1;
+    private int size;
 
     /**
      * Sole constructor. Initializes the stack.
      */
-    public MyStack() {
-        stack = new ArrayList<>();
+
+    public MyStack(Class<T> classs, int cap) {
+            stack = (T[]) Array.newInstance(classs, cap);
+            count1 = 0;
+            size = cap;
     }
 
      /** Puts a new <code>element</code> at the top of the stack.
      *
      * @param element    the element to be added
      */
-    public void push(T element) {
-        stack.add(element);
-    }
+     public void push(T element) {
+         if (count1 == size) {
+             throw new IndexOutOfBoundsException("Stack limit was reached");
+         } else {
+             stack[count1] = element;
+             count1++;
+         }
+     }
 
     /** Gets an element from the top of the stack.
      *
@@ -25,12 +36,11 @@ public class MyStack<T> {
      * @throws  IndexOutOfBoundsException  If stack is empty and it's
      *                                     impossible to get an element
      */
-    public T pop() throws IndexOutOfBoundsException {
-        if (stack.isEmpty()) {
+    public T pop() {
+        if (count1 == 0) {
             throw new IndexOutOfBoundsException("Stack is empty");
         } else {
-            int el_num = stack.size();
-            return stack.remove(el_num - 1);
+            return stack[--count1];
         }
     }
 
@@ -39,6 +49,27 @@ public class MyStack<T> {
      * @return  the number of elements on the stack
      */
     public int count() {
-        return stack.size();
+        return count1;
+    }
+
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+
+            public boolean hasNext() {
+                if (count1 > 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            public T next() {
+                if (count1 == 0) {
+                    throw new NoSuchElementException("No next element");
+                } else {
+                    return pop();
+                }
+            }
+        };
     }
 }
