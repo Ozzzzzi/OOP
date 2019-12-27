@@ -16,7 +16,9 @@ public class GradeBook {
      private QualifyingWork qualifyingWork;
      private Map<Integer, Session> sessions;
 
-
+/**
+ * Constructor which initializes all the fields in the book.
+ */
      public GradeBook(int bookNum, String name, String speciality, String department) {
          this.bookNum = bookNum;
          this.name = name;
@@ -27,6 +29,19 @@ public class GradeBook {
          this.sessions = new HashMap<>();
     }
 
+/**
+ * Adds a new subject of the given type to the given session.  
+ * Available subject types are "Exam", "Credit" and "DiffCredit".
+ * Sessions are numerated from 1 to 10. Grades for credit are "pass"
+ * and "notpass". Grades for exam and diff credit are in the range 
+ * from 2 to 5.
+ *
+ * @param  sessionNum                 the number of session
+ * @param  type                       the subject type
+ * @param  name                       the subject title
+ * @param  grade                      the grade for exam, diff credit or credit
+ * @throws IllegalArgumentException   if any parameter is out of available values
+ */
     public void addSubjectToSession(int sessionNum, String type, String name, String grade) {
          if (sessionNum > 10 || sessionNum < 1) {
              throw new IllegalArgumentException("Available range for session num is from 1 to 10");
@@ -59,7 +74,15 @@ public class GradeBook {
          }
 
     }
-
+     
+/**
+ * Removes subject from the given session by the subject name.
+ *
+ * @param  sessionNum                 the number of session
+ * @param  name                       the subject title
+ * @throws IllegalArgumentException   if any <code>sessionNum</code> is out of available values
+ * @throws NoSuchElementException     if no session with the <code>sessionNum</code> was found
+ */
     public void removeSubjectFromSession(int sessionNum, String name) {
         if (sessionNum > 10 || sessionNum < 1) {
             throw new IllegalArgumentException("Available range for session num is from 1 to 10");
@@ -70,23 +93,49 @@ public class GradeBook {
             throw new NoSuchElementException("No session was found");
         }
     }
-
+/**
+ * Adds a qualifying work to the grade book.
+ *
+ * @param  nameOfWork                 the name of qualifying work
+ * @param  grade                      the grade from 1 to 5
+ */
     public void addQualifyingWork(String nameOfWork, int grade) {
          qualifyingWork.addWork(nameOfWork, grade);
     }
-
+     
+/**
+ * Removes the qualifying work from the grade book
+ * and resets all fields.
+ *
+ */
     public void removeQualifying() {
          qualifyingWork.removeWork();
     }
-
+     
+/**
+ * Adds final grade for some subject to the diploma supplement.
+ *
+ * @param  name                 the subject title
+ * @param  grade                the grade from 1 to 5
+ */
     public void addDiplomaGrade(String name, int grade) {
          diploma.addGrade(name, grade);
     }
 
+/**
+ * Removes the given subject from the diploma supplement.
+ *
+ * @param  name                 the subject title
+ */   
     public void removeDiplomaGrade(String name) {
         diploma.removeGrade(name);
     }
 
+/**
+ * Finds the average grade for all sessions presented in the book.
+ *
+ * @return       the average grade
+ */
     public double getAverageForAll() {
          double grade = 0;
          int count = 0;
@@ -101,6 +150,13 @@ public class GradeBook {
         }
     }
 
+     
+/**
+ * Checks whether it is possible to get red diploma on the current 
+ * study stage.
+ *
+ * @return       true if possible and false otherwise
+ */
     public boolean canGetRedDiploma() {
          for (Session curr : sessions.values()) {
              if (!(curr.noNotPass()))
@@ -109,6 +165,13 @@ public class GradeBook {
          return (diploma.noSats()) && (diploma.getDiplomaGrade() >= 4.75) && (qualifyingWork.getGrade() == 5);
     }
 
+/**
+ * Checks whether it is possible to get increased scholarship 
+ * in the <code>sessionNum</code> session.
+ *
+ * @param   sessionNum   the number of session
+ * @return               true if possible and false otherwise
+ */
     public boolean canGetScholarship(int sessionNum) {
         if (sessions.containsKey(sessionNum)) {
             Session curr = sessions.get(sessionNum);
@@ -117,7 +180,11 @@ public class GradeBook {
             throw new NoSuchElementException("No session was found");
         }
     }
-
+     
+/**
+ * Pack of setters and getters for the grade book.
+ *
+ */
     public String getQualifyingName() {
         return qualifyingWork.getName();
     }
