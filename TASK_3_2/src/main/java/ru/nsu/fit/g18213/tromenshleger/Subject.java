@@ -1,7 +1,15 @@
 package ru.nsu.fit.g18213.tromenshleger;
 
+/**
+ * Implements an abstract class from which classes Exam, 
+ * DiffCredit, Credit and QualifyingWork are inherited.
+ */
 public abstract class Subject<T> {
-
+    
+/**
+ * Pack of setters and getters
+ *
+ */
     private String name;
     private T grade;
 
