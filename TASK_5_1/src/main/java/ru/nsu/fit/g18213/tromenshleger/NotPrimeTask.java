@@ -1,6 +1,12 @@
 package ru.nsu.fit.g18213.tromenshleger;
 import java.util.concurrent.*;
 
+/**
+ * This class implements the same NotPrime function
+ * but in a form of a callable task for further
+ * usage in ExecutorService.
+ */
+
 public class NotPrimeTask implements Callable<Boolean>{
 
     private int[] numArray;
