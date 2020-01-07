@@ -1,32 +1,32 @@
 package ru.nsu.fit.g18213.tromenshleger;
-import java.util.concurrent.*;
 
-/**
- * This class implements the same NotPrime function
- * but in a form of a callable task for further
- * usage in ExecutorService.
- */
+import java.util.concurrent.Callable;
+import java.util.concurrent.CountDownLatch;
 
-public class NotPrimeTask implements Callable<Boolean>{
+public class NotPrimeTask implements Callable<Boolean> {
 
     private int[] numArray;
+    private int start;
+    private int end;
+    private CountDownLatch latch;
 
-    public NotPrimeTask(int[] numArray) {
-        this.numArray = new int[500001];
-        System.arraycopy(numArray, 0, this.numArray, 0, numArray.length);
+    public NotPrimeTask(int[] numArray, int start, int end, CountDownLatch latch) {
+        this.numArray = numArray;
+        this.start = start;
+        this.end = end;
+        this.latch = latch;
     }
 
+    @Override
     public Boolean call() {
-        for (Integer num : numArray) {
-            if (num < 2) {
+        for (int i = start; i <= end; i++) {
+            if (NotPrime.check(numArray[i])) {
+                latch.countDown();
                 return true;
             }
-            for (int i = 2; i * i <= num; i++) {
-                if (num % i == 0) {
-                    return true;
-                }
-            }
         }
+        latch.countDown();
         return false;
     }
+
 }

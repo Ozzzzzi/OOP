@@ -35,7 +35,7 @@ public class Tests {
     @Test
     public void executor1() throws ExecutionException, InterruptedException {
         start = System.currentTimeMillis();
-        Assert.assertTrue(FindNotPrimes.threadPoolComputing(numbers1));
+        Assert.assertTrue(FindNotPrimes.threadPoolComputing(numbers1, 4));
         finish = System.currentTimeMillis();
 
         System.out.println("Time: " + (finish - start));
@@ -64,7 +64,7 @@ public class Tests {
     @Test
     public void executor2() throws ExecutionException, InterruptedException {
         start = System.currentTimeMillis();
-        Assert.assertTrue(FindNotPrimes.threadPoolComputing(numbers2));
+        Assert.assertTrue(FindNotPrimes.threadPoolComputing(numbers2, 4));
         finish = System.currentTimeMillis();
 
         System.out.println("Time: " + (finish - start));
@@ -95,7 +95,7 @@ public class Tests {
     @Test
     public void executor3() throws ExecutionException, InterruptedException {
         start = System.currentTimeMillis();
-        Assert.assertTrue(FindNotPrimes.threadPoolComputing(numbers3));
+        Assert.assertFalse(FindNotPrimes.threadPoolComputing(numbers3, 4));
         finish = System.currentTimeMillis();
 
         System.out.println("Time: " + (finish - start));
