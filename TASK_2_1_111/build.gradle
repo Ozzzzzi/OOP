@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group 'org.example'
@@ -25,3 +26,5 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+mainClassName = 'ru.nsu.fit.g18213.tromenshleger.Main'
