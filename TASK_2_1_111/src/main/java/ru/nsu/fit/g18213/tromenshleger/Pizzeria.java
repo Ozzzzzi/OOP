@@ -20,7 +20,7 @@ public class Pizzeria {
      * Initializes the pizzeria with the given employees parameters and warehouse capacity.
      *
      * @param employeesParameters parameters of the chefs and couriers
-     * @param warehouseCapacity capacity of the warehouse
+     * @param warehouseCapacity   capacity of the warehouse
      */
     public Pizzeria(File employeesParameters, int warehouseCapacity) {
         JSONParser reader = new JSONParser();
@@ -39,6 +39,7 @@ public class Pizzeria {
      * @param numOfOrders total number of orders
      * @return the {@code pizzeriaData} object
      */
+
     public PizzeriaData start(int numOfOrders) {
         chefs.run(employees, warehouse, ordersQueue, pizzeriaData);
         couriers.run(employees, warehouse, pizzeriaData);
@@ -50,7 +51,7 @@ public class Pizzeria {
     }
 
     private void order() {
-        System.out.println( "Your order id is " + pizzeriaData.getCurrentOrderId());
+        System.out.println("Your order id is " + pizzeriaData.getCurrentOrderId());
         Order order = new Order(pizzeriaData.getCurrentOrderId());
         pizzeriaData.updateCurrentOrderId();
         ordersQueue.order(order);
@@ -86,6 +87,7 @@ public class Pizzeria {
                 e.printStackTrace();
             }
         }
+        System.exit(0);
     }
 }
 

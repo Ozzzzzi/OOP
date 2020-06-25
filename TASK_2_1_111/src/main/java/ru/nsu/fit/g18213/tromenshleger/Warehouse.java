@@ -1,13 +1,12 @@
 package ru.nsu.fit.g18213.tromenshleger;
 
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
 class Warehouse {
-    private static ArrayBlockingQueue<Order> itemsInWarehouse;
+    private static NewArrayBlockingQueue<Order> itemsInWarehouse;
 
     Warehouse(int capacity) {
-        itemsInWarehouse = new ArrayBlockingQueue<>(capacity, true);
+        itemsInWarehouse = new NewArrayBlockingQueue<>(capacity, true);
     }
 
     void putItemAwayInWarehouse(Order order) {
